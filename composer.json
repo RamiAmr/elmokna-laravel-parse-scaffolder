@@ -1,0 +1,34 @@
+{
+  "name": "approcks/laravel-parse-scaffolder",
+  "type": "package",
+  "description": "Scaffolding package that generates CRUD Controllers ,Views and models for parse Database",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "laravel",
+    "parse-php-sdk",
+    "Scaffolding"
+  ],
+  "authors": [
+    {
+      "name": "Rami Amro",
+      "email": "Rami.amro.ahmed@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "parse/php-sdk": ">=1.4.*",
+    "laravelcollective/html": "^5.5"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "approcks\\laravelParseScaffolder\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "approcks\\laravelParseScaffolder\\": "src/"
+    }
+  }
+}
