@@ -16,8 +16,6 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0",
-    "parse/php-sdk": ">=1.4.*",
     "laravelcollective/html": "^5.5"
   },
   "minimum-stability": "dev",
