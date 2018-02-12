@@ -18,7 +18,6 @@
   "require": {
     "laravelcollective/html": "^5.5"
   },
-  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "approcks\\laravelParseScaffolder\\": "src/"
