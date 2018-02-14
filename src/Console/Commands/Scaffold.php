@@ -45,42 +45,27 @@ class Scaffold extends Command
      */
     public function handle()
     {
-        // Get single Parameters
+        // Get Table name from command line with argument name "parseTableName"
         $parseTableName = $this->argument('parseTableName');
-        // Get all
+
+        //Get template option from command line
         $template = $this->option("template");
 
-        if (!$parseTableName) {
-            $this->error("Parse Table Name Must Be Specified");
-        }
 
+        //Init Model Generator
         $modelGenerator = new ModelGenerator($this, $parseTableName, $template);
+        //Generate Model File for the given parse table
         $modelGenerator->generate();
 
+        //Init Controller Generator
         $controllerGenerator = new ControllerGenerator($this, $parseTableName, $template);
+        //Generate A Resource Controller File for the given parse table
         $controllerGenerator->generate();
 
+        //Init Views Controller
         $viewsGenerator = new ViewGenerator($this, $parseTableName, $template);
+        //Generate 4 Views (Index, Create, Show,Edit) Files for the given parse table
         $viewsGenerator->generate();
     }
 
-    /*// Stop execution and ask a question
-     $answer = $this->ask('What is your name?');
-
-    // Ask for sensitive information
-    $password = $this->secret('What is the password?');
-
-    // Choices
-    $name = $this->choice('What is your name?', ['Taylor', 'Dayle'], $default);
-
-    // Confirmation
-    if ($this->confirm('Is '.$name.' correct, do you wish to continue? [y|N]')) {
-        //
-    }
-
-    $this->line("Some text");
-    $this->info("Hey, watch this !");
-    $this->comment("Just a comment passing by");
-    $this->question("Why did you do that?");
-    $this->error("Ops, that should not happen.");*/
 }

@@ -14,7 +14,6 @@ use Parse\ParseSchema;
 
 class ControllerGenerator extends BaseGenerator
 {
-
     public function generate()
     {
         $fileName = ucfirst($this->tableName) . "Controller.php";
@@ -38,6 +37,7 @@ class ControllerGenerator extends BaseGenerator
 
     private function __replaceContent(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
 
         //replace TemplateController class name to the current given class name
@@ -48,8 +48,12 @@ class ControllerGenerator extends BaseGenerator
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * @param String $file_path
+     */
     private function generateIndex(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
 
         $indexContent = "\$json_data = " . ucfirst($this->tableName) . "::QueryAll();";
@@ -62,8 +66,12 @@ class ControllerGenerator extends BaseGenerator
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * @param String $file_path
+     */
     private function generateCreate(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
         $indexContent = "";
 
@@ -89,7 +97,7 @@ class ControllerGenerator extends BaseGenerator
                             ) . ";");
                         break;
                     case "Relation":
-                      //  $targetClass = $fieldValue["targetClass"];
+                        //  $targetClass = $fieldValue["targetClass"];
                         break;
                     case "Boolean":
                     case "String":
@@ -97,7 +105,6 @@ class ControllerGenerator extends BaseGenerator
                     case "Date":
                     case "File":
                     case "GeoPoint":
-
                     case "ACL":
                     case "Object":
                     case "Array":
@@ -114,14 +121,21 @@ class ControllerGenerator extends BaseGenerator
 
         $fileContent = str_replace("/*CREATE-METHOD-HERE*/", $indexContent, $fileContent);
 
+        /*import all namespaces*/
         $fileContent = str_replace("/*USE-HERE*/", implode("\n", $uses), $fileContent);
 
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * @param String $file_path
+     */
     private function generateShow(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
+
+        /*generate a call to QueryGet, that will return the object with $id as JSON object*/
         $editContent = "\$item = $this->tableName" . "::QueryGet(\$id);";
         $editContent .= "\$item = \$item[\"status_code\"] ==200? \$item[\"data\"]:[];";
 
@@ -140,13 +154,16 @@ class ControllerGenerator extends BaseGenerator
 
                         array_push($viewParams, "\"$fieldKey\"");
                         break;
+
+                    case "Relation":
+                        //TODO
+                        break;
                     case "Boolean":
                     case "String":
                     case "Number":
                     case "Date":
                     case "File":
                     case "GeoPoint":
-                    case "Relation":
                     case "ACL":
                     case "Object":
                     case "Array":
@@ -157,6 +174,7 @@ class ControllerGenerator extends BaseGenerator
                 }
             }
         } catch (\Exception $e) {
+            $this->command->error($e->getMessage());
         }
 
         $editContent .= "\nreturn view('$this->tableName.show', compact(" . implode(",", $viewParams) . "));";
@@ -166,9 +184,15 @@ class ControllerGenerator extends BaseGenerator
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * @param String $file_path
+     */
     private function generateEdit(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
+
+        /*generate a call to QueryGet, that will return the object with $id as JSON object*/
         $editContent = "\$item = $this->tableName" . "::QueryGet(\$id);";
         $editContent .= "\$item = \$item[\"status_code\"] ==200? \$item[\"data\"]:[];";
 
@@ -179,7 +203,11 @@ class ControllerGenerator extends BaseGenerator
 
             array_push($viewParams, "\"item\"");
 
+            /*iterate on all fields*/
             foreach ($fields as $fieldKey => $fieldValue) {
+
+                /*if a field type is relation or pointer, query all items in table and return them as JSON array.
+                this array will then e passed to the view to populate <select> elements*/
                 switch ($fieldValue["type"]) {
                     case "Pointer":
                         $targetClass = $fieldValue["targetClass"];
@@ -217,24 +245,32 @@ class ControllerGenerator extends BaseGenerator
 
         $editContent .= "\nreturn view('$this->tableName.edit', compact(" . implode(",", $viewParams) . "));";
 
+        /*Replace the keyword (EDIT-METHOD-HERE) with the generated logic*/
         $fileContent = str_replace("/*EDIT-METHOD-HERE*/", $editContent, $fileContent);
+
+        /*Re-write the changes to the file*/
         file_put_contents($file_path, $fileContent);
     }
 
     private function generateStore(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
 
         try {
+            //get writable fields in a parse table
             $fields = $this->writableTableFields;
             $content = [];
 
+            /*create an instance of a parseObject model with a given id that will be provided by the Update method*/
             $line = "\$object = new " . ucfirst($this->tableName) . "();";
 
             array_push($content, $line);
+            /*Iterate on all fields and get each fields data type*/
             foreach ($fields as $fieldKey => $fieldValue) {
                 $line = "";
 
+                /*generate a call to a setter based on the data type and the fields name */
                 switch ($fieldValue["type"]) {
                     case "Boolean":
                         $line = "\$object->set" . ucfirst($fieldKey) . "(filter_var(\$request->get(\"$fieldKey\"), FILTER_VALIDATE_BOOLEAN));";
@@ -263,8 +299,6 @@ class ControllerGenerator extends BaseGenerator
                         break;
                     case "ACL":
                     case "Object":
-
-
                     case "Array":
                     case "Null":
                     default:
@@ -282,27 +316,39 @@ class ControllerGenerator extends BaseGenerator
             array_push($content, $line);
 
             $fileContent = str_replace("/*STORE-METHOD-HERE*/", implode("\n", $content), $fileContent);
-        } catch (ParseException $e) {
+        } catch (\Exception $e) {
+            $this->command->error($e->getMessage());
         }
 
-
+        /*Re-write the changes to the file*/
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * Generates the Content of the Update Method
+     * @param String $file_path
+     */
     private function generateUpdate(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
 
         try {
+            //get writable fields in a parse table
             $fields = $this->writableTableFields;
             $content = [];
 
+            /*create an instance of a parseObject model with a given id that will be provided by the Update method*/
             $line = "\$object = new " . ucfirst($this->tableName) . "(\$id);";
 
             array_push($content, $line);
+
+
+            /*Iterate on all fields and get each fields data type*/
             foreach ($fields as $fieldKey => $fieldValue) {
                 $line = "";
 
+                /*generate a call to a setter based on the data type and the fields name */
                 switch ($fieldValue["type"]) {
                     case "Boolean":
                         $line = "\$object->set" . ucfirst($fieldKey) . "(filter_var(\$request->get(\"$fieldKey\"), FILTER_VALIDATE_BOOLEAN));";
@@ -344,25 +390,42 @@ class ControllerGenerator extends BaseGenerator
                 }
             }
 
+            //generate a parseObject save
             $line = "\$object->save();
             \nreturn \$this->index();";
             array_push($content, $line);
 
             $fileContent = str_replace("/*UPDATE-METHOD-HERE*/", implode("\n", $content), $fileContent);
-        } catch (ParseException $e) {
+        } catch (\Exception $e) {
+            $this->command->error($e->getMessage());
         }
 
+        /*Re-write the changes to the file*/
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     * Generates the Content of the Destroy Method
+     * @param String $file_path
+     */
     private function generateDestroy(String $file_path)
     {
+        /*Get File text content*/
         $fileContent = file_get_contents($file_path);
 
+        /*Generate logic*/
+
+        /*create an instance of a parseObject model with a given id that will be provided by the
+        destroy method.
+        destroy is called on the parseObject, then the page will be redirected to the index*/
         $deleteContent = "\$object = new $this->tableName(\$id);";
         $deleteContent .= "\$object->destroy();";
         $deleteContent .= "\n return \$this->index();";
+
+        /*Replace the keyword (DESTROY-METHOD-HERE) with the generated logic*/
         $fileContent = str_replace("/*DESTROY-METHOD-HERE*/", $deleteContent, $fileContent);
+
+        /*Re-write the changes to the file*/
         file_put_contents($file_path, $fileContent);
     }
 }

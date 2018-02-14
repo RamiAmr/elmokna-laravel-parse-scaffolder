@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class ParseScaffoldingServiceProvider extends ServiceProvider
 {
 
+    //Path to the class responsible for managing artisan command line
     protected static $commands = [
         'approcks\\laravelParseScaffolder\\Console\\Commands\\Scaffold',
     ];

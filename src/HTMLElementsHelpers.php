@@ -11,6 +11,10 @@ namespace approcks\laravelParseScaffolder;
 
 use approcks\laravelParseScaffolder\enums\Templates;
 
+/*
+    This class is responsible for Returning html classes according to the specified template
+*/
+
 class HTMLElementsHelpers
 {
     public static function getFormInputElementClasses(String $template)

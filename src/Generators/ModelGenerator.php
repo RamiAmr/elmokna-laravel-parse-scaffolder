@@ -15,11 +15,9 @@ class ModelGenerator extends BaseGenerator
 {
     public function generate()
     {
-        //TODO show some confirmation if file already exists
         $fileName = ucfirst($this->tableName) . ".php";
         $destination = app_path("Http/$fileName");
 
-        //TODO add some validation for non existing directories
         $this->move(__DIR__ . "/../templates/models/TemplateModel.php", $destination);
 
         //Add Content
@@ -57,7 +55,6 @@ class ModelGenerator extends BaseGenerator
                         $generatedSetters = $res[0];
                         $generatedGetters = $res[1];
                         break;
-
                     case "String":
                         $res = $this->generateMethod("String", $fieldKey);
 
@@ -176,6 +173,15 @@ class ModelGenerator extends BaseGenerator
         file_put_contents($file_path, $fileContent);
     }
 
+    /**
+     *  Generate Setters And getters for basic data types
+     * TODO separate this method to 2 one fpr setter and the other for getter
+     * @param String $type A string specifying the casting type ex. (Int)
+     * @param String $fieldKey The
+     * @return array an array of 2 elements.
+     * The First one is the Setter method as String,
+     * The Second one is the getter method as String
+     */
     private function generateMethod(String $type, String $fieldKey)
     {
         /*Setters*/

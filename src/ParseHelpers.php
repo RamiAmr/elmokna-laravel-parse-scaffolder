@@ -16,6 +16,12 @@ use Parse\ParseSessionStorage;
 
 class ParseHelpers
 {
+    /**
+     * Gets the Schema/Fields of a given table
+     * @param String $tableName The table name to get its schema
+     * @param bool $isWritable if true, objectId, createdDate, updatedDate will not be retrieved
+     * @return array The Schema/Fields in the given table
+     */
     public static function getParseTableFields(String $tableName, bool $isWritable = true)
     {
         $parseSchema = new ParseSchema($tableName);
@@ -36,6 +42,12 @@ class ParseHelpers
         }
     }
 
+
+    /**
+     *Initializes the Connection to Parse database
+     *Initialization Params Are acquired from .env file
+     *@see README.md
+     */
     public static function initParse()
     {
         if (session_status() == PHP_SESSION_NONE) {
