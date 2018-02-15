@@ -3,7 +3,8 @@
   "type": "package",
   "description": "Scaffolding package that generates CRUD Controllers ,Views and models for parse Database",
   "license": "MIT",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "version": "0.0.1",
   "keywords": [
     "php",
     "laravel",
