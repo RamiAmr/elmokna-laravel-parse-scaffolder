@@ -5,6 +5,12 @@
   "license": "MIT",
   "minimum-stability": "dev",
   "version": "0.0.1",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://bitbucket.org/approcks/parse-laraval-scaffolding.git"
+    }
+  ],
   "keywords": [
     "php",
     "laravel",
