@@ -25,7 +25,7 @@ then, add your new provider to the providers array of config/app.php:
   ],
 ```
 
-Finally, add your database credentials int the .env file with the following keys
+Finally, add your database credentials in the .env file with the following keys
 
 ```
 DB_HOST=Your parse IP or domain
@@ -42,7 +42,7 @@ In Your terminal run:
 php artisan make:crud your-parse-table-name {--template=none}
 ``
 
-By default if ``--template`` option was not specified or ``--template==none``, basic html elements will be generated.
+By default if ``--template`` option was not specified or ``--template=none``, basic html elements will be generated.
 
 To generate html elements with metronic support, set ``--template=metronic``
 
