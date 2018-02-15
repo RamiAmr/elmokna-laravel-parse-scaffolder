@@ -55,7 +55,6 @@ class Scaffold extends Command
 
         ParseHelpers::initParse();
         $health = ParseClient::getServerHealth();
-        $this->info(json_encode($health));
 
         //Check if connection to database is established
 
