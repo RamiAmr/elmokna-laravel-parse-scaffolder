@@ -5,18 +5,12 @@ This package supports basic html and default metronic template.
 
 ###Installation
 
-Begin by installing this package through Composer.
-
-```
-composer require approcks/laravel-parse-scaffolder
-```
-
-or add it through composer.json file and run composer install
+Begin by installing this package through composer.json file and run composer install
 
 ```
 "require": {
     //...
-    "approcks/laravelParseScaffolder": "*"
+    "approcks/laravel-parse-scaffolder": "dev-master"
     //...
   },
 ```

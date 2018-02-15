@@ -4,7 +4,7 @@
   "description": "Scaffolding package that generates CRUD Controllers ,Views and models for parse Database",
   "license": "MIT",
   "minimum-stability": "dev",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "repositories": [
     {
       "type": "vcs",
