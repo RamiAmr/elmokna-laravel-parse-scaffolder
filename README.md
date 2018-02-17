@@ -10,7 +10,7 @@ Begin by installing this package through composer.json file and run composer ins
 ```
 "require": {
     //...
-    "approcks/laravel-parse-scaffolder": "dev-master"
+    "elmokna/laravel-parse-scaffolder": "dev-master"
     //...
   },
 ```
@@ -20,7 +20,7 @@ then, add your new provider to the providers array of config/app.php:
 ```
 'providers' => [
     // ...
-    approcks\laravelParseScaffolder\ParseScaffoldingServiceProvider::class,
+    elmokna\laravelParseScaffolder\ParseScaffoldingServiceProvider::class,
     // ...
   ],
 ```

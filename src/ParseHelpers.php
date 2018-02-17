@@ -6,7 +6,7 @@
  * Time: 5:28 PM
  */
 
-namespace approcks\laravelParseScaffolder;
+namespace elmokna\laravelParseScaffolder;
 
 
 use Parse\ParseClient;

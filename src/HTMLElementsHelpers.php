@@ -6,10 +6,10 @@
  * Time: 1:22 PM
  */
 
-namespace approcks\laravelParseScaffolder;
+namespace elmokna\laravelParseScaffolder;
 
 
-use approcks\laravelParseScaffolder\enums\Templates;
+use elmokna\laravelParseScaffolder\enums\Templates;
 
 /*
     This class is responsible for Returning html classes according to the specified template

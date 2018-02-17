@@ -6,9 +6,9 @@
  * Time: 3:00 PM
  */
 
-namespace approcks\laravelParseScaffolder\Generators;
+namespace elmokna\laravelParseScaffolder\Generators;
 
-use approcks\laravelParseScaffolder\ParseHelpers;
+use elmokna\laravelParseScaffolder\ParseHelpers;
 use Parse\ParseException;
 use Parse\ParseSchema;
 

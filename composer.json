@@ -1,16 +1,9 @@
 {
-  "name": "approcks/laravel-parse-scaffolder",
+  "name": "elmokna/laravel-parse-scaffolder",
   "type": "package",
   "description": "Scaffolding package that generates CRUD Controllers ,Views and models for parse Database",
   "license": "MIT",
   "minimum-stability": "dev",
-  "version": "1.0.1",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://bitbucket.org/approcks/parse-laraval-scaffolding.git"
-    }
-  ],
   "keywords": [
     "php",
     "laravel",
@@ -28,12 +21,12 @@
   },
   "autoload": {
     "psr-4": {
-      "approcks\\laravelParseScaffolder\\": "src/"
+      "elmokna\\laravelParseScaffolder\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "approcks\\laravelParseScaffolder\\": "src/"
+      "elmokna\\laravelParseScaffolder\\": "src/"
     }
   }
 }

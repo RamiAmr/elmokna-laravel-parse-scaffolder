@@ -6,10 +6,10 @@
  * Time: 3:07 PM
  */
 
-namespace approcks\laravelParseScaffolder\Generators;
+namespace elmokna\laravelParseScaffolder\Generators;
 
-use approcks\laravelParseScaffolder\enums\Templates;
-use approcks\laravelParseScaffolder\ParseHelpers;
+use elmokna\laravelParseScaffolder\enums\Templates;
+use elmokna\laravelParseScaffolder\ParseHelpers;
 use Illuminate\Console\Command;
 
 class BaseGenerator

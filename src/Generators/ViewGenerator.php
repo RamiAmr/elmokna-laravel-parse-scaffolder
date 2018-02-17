@@ -6,11 +6,11 @@
  * Time: 3:00 PM
  */
 
-namespace approcks\laravelParseScaffolder\Generators;
+namespace elmokna\laravelParseScaffolder\Generators;
 
 
-use approcks\laravelParseScaffolder\enums\Templates;
-use approcks\laravelParseScaffolder\HTMLElementsHelpers;
+use elmokna\laravelParseScaffolder\enums\Templates;
+use elmokna\laravelParseScaffolder\HTMLElementsHelpers;
 
 class ViewGenerator extends BaseGenerator
 {

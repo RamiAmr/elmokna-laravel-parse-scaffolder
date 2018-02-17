@@ -1,6 +1,6 @@
 <?php
 
-namespace approcks\laravelParseScaffolder;
+namespace elmokna\laravelParseScaffolder;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -9,7 +9,7 @@ class ParseScaffoldingServiceProvider extends ServiceProvider
 
     //Path to the class responsible for managing artisan command line
     protected static $commands = [
-        'approcks\\laravelParseScaffolder\\Console\\Commands\\Scaffold',
+        'elmokna\\laravelParseScaffolder\\Console\\Commands\\Scaffold',
     ];
 
     /**

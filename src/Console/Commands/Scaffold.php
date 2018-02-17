@@ -1,10 +1,10 @@
 <?php
 
-namespace approcks\laravelParseScaffolder\Console\Commands;
+namespace elmokna\laravelParseScaffolder\Console\Commands;
 
-use approcks\laravelParseScaffolder\Generators\ControllerGenerator;
-use approcks\laravelParseScaffolder\Generators\ModelGenerator;
-use approcks\laravelParseScaffolder\Generators\ViewGenerator;
+use elmokna\laravelParseScaffolder\Generators\ControllerGenerator;
+use elmokna\laravelParseScaffolder\Generators\ModelGenerator;
+use elmokna\laravelParseScaffolder\Generators\ViewGenerator;
 use Illuminate\Console\Command;
 
 /*

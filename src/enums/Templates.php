@@ -6,7 +6,7 @@
  * Time: 11:47 AM
  */
 
-namespace approcks\laravelParseScaffolder\enums;
+namespace elmokna\laravelParseScaffolder\enums;
 
 
 abstract class Templates
